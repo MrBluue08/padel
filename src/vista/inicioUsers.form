@@ -85,7 +85,7 @@
         </constraints>
         <properties>
           <foreground color="-4521981"/>
-          <text value="Identificador y/o contraseña incorreco(s)"/>
+          <text value="error"/>
         </properties>
       </component>
     </children>

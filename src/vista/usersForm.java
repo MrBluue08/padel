@@ -32,6 +32,11 @@ public class usersForm {
     public JList<String> listaDni = new JList(cargarDni());
     private JButton backBtn;
 
+    Icon icon = new ImageIcon("img/backArrow.png");
+    public void start(){
+        backBtn.setIcon(icon);
+    }
+
     public usersForm() throws SQLException {
         addBtn.addActionListener(new ActionListener() {
             @Override

@@ -115,10 +115,14 @@ public class controlador {
         resultado.next();
         String pass = resultado.getString(5);
         usuarios user = new usuarios(resultado.getString(1),resultado.getString(2),resultado.getString(3),resultado.getString(4),resultado.getString(5));
-        if (passwd.equals(pass)) {
+        String activo = resultado.getString(6);
+        if (passwd.equals(pass) && Integer.parseInt(activo) == 1) {
             openMainUser(user);
-        }else{
-            openInicioUsers(true);
+        }else if(Integer.parseInt(activo) == 0) {
+            openInicioUsers(true, "Usuario desactivado temporalmente");
+        }
+        else{
+            openInicioUsers(true,"Identificador y/o contraseña incorrecto(s)");
         }
     }
 
@@ -162,6 +166,7 @@ public class controlador {
         formPistas form = new formPistas();
         view.setContentPane(form.panel1);
         view.setSize(750,500);
+        form.start();
         view.setVisible(true);
     }
 
@@ -169,14 +174,16 @@ public class controlador {
         usersForm form = new usersForm();
         view.setContentPane(form.panel1);
         view.setSize(800,500);
+        form.start();
         view.setVisible(true);
     }
 
-    public void openInicioUsers(Boolean error){
+    public void openInicioUsers(Boolean error, String msg){
         inicioUsers form = new inicioUsers();
         view.setContentPane(form.panel1);
         view.setSize(500,500);
         form.errorLbl.setVisible(error);
+        form.errorLbl.setText(msg);
         view.setVisible(true);
     }
 
@@ -206,5 +213,12 @@ public class controlador {
             dni.add(u.toString());
         }
         return dni;
+    }
+
+    public void cerrarSesion() {
+        index form = new index();
+        view.setContentPane(form.panel1);
+        view.setSize(500,500);
+        view.setVisible(true);
     }
 }

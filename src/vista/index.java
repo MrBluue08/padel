@@ -16,7 +16,7 @@ public class index {
         startUserBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.openInicioUsers(false);
+                c.openInicioUsers(false,"");
             }
         });
         startAdminBtn.addActionListener(new ActionListener() {

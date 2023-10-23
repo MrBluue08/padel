@@ -10,6 +10,7 @@ public class mainUsuarios {
     private JButton miPerfilBtn;
     public JPanel panel1;
     private JButton reservasBtn;
+    private JButton closeBtn;
     controlador c = new controlador();
     public static usuarios user = new usuarios();
 
@@ -23,5 +24,11 @@ public class mainUsuarios {
             }
         });
 
+        closeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 c.cerrarSesion();
+            }
+        });
     }
 }

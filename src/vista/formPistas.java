@@ -39,6 +39,11 @@ public class formPistas {
     private JButton buscadorBtn;
     private JLabel buscadorLbl;
 
+    Icon icon = new ImageIcon("img/backArrow.png");
+    public void start(){
+        backBtn.setIcon(icon);
+    }
+
     public formPistas() throws SQLException {
         backBtn.addActionListener(new ActionListener() {
             @Override
