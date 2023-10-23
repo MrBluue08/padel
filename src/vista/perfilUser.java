@@ -1,6 +1,7 @@
 package vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -9,6 +10,8 @@ import Controllers.*;
 import Models.usuarios;
 
 public class perfilUser {
+
+
     public JPanel panel1;
     public JLabel dniTxt;
     public JLabel nameTxt;
@@ -21,7 +24,11 @@ public class perfilUser {
     public JLabel passwdTxt;
     private JPasswordField editPasswd;
 
+
     controlador controlador = new controlador();
+    Icon icon = new ImageIcon("img/backArrow.png");
+
+
 
 
 
@@ -35,6 +42,7 @@ public class perfilUser {
         mailTxt.setVisible(true);
         passwdTxt.setVisible(true);
         editBtn.setVisible(true);
+        backBtn.setIcon(icon);
     }
 
     public void editMode(){
