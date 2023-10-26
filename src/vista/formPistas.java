@@ -29,7 +29,6 @@ public class formPistas {
     private JCheckBox activoCheckBox;
     private JTextField precioTxt;
     private JButton addBtn;
-    private JButton selectBtn;
     private JButton editBtn;
     private JLabel idLbl;
     private JLabel precioLbl;
@@ -62,13 +61,7 @@ public class formPistas {
                 }
             }
         });
-        selectBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                System.out.println(listadoPistas.getSelectedValue());
-            }
-        });
         buscadorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -141,6 +141,14 @@ public class controlador {
         view.setVisible(true);
     }
 
+    public void openReservas(){
+        reservas main = new reservas();
+        main.setCalendario();
+        view.setContentPane(main.panel1);
+        view.setSize(500,500);
+        view.setVisible(true);
+    }
+
     public void fillInfoUser(usuarios u, perfilUser perfil){
         perfil.nameTxt.setText(u.getNombre()+" "+u.getApellidos());
         perfil.dniTxt.setText(u.getDni());
@@ -193,6 +201,7 @@ public class controlador {
         view.setSize(500,500);
         view.setVisible(true);
     }
+
 
     public ArrayList listPistas() throws SQLException{
         ResultSet pistasResult = f.ejecutarQuery("SELECT * FROM pistas");

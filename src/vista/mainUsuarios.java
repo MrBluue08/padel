@@ -30,5 +30,9 @@ public class mainUsuarios {
                  c.cerrarSesion();
             }
         });
+        reservasBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { c.openReservas(); }
+        });
     }
 }
