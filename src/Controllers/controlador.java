@@ -19,7 +19,7 @@ public class controlador {
         view.setVisible(true);
     }
 
-    public void addPista(String precio, Boolean activo) throws SQLException {
+    public void addPista(String id,String condicion,String precio, Boolean activo) throws SQLException {
 
         Float cost = Float.parseFloat(precio);
         Integer flag = 0;
@@ -28,8 +28,9 @@ public class controlador {
             flag = 1;
         }
 
-        String query = "INSERT INTO `pistas`(`Precio_por_hora`, `activa`) " +
-                "VALUES ('"+cost+"',"+flag+")";
+        String query = "INSERT INTO `pistas`(`ID_pista`, `condicion`, `Precio_por_hora`, `activa`) " +
+                "VALUES ('"+id+"','"+condicion+"','"+cost+"','"+flag+"')";
+        System.out.println(query);
         f.update(query);
     }
 
@@ -45,15 +46,26 @@ public class controlador {
     }
 
     public pistas selectPista(String id) throws SQLException {
-        String query = "SELECT * FROM pistas WHERE ID_pista = "+id+";";
+        String query = "SELECT * FROM pistas;";
+        if(id.equals("")){
+            query = "SELECT * FROM pistas;";
+        }else{
+            query = "SELECT * FROM pistas WHERE ID_pista LIKE '"+id+"';";
+        }
         ResultSet pista = f.ejecutarQuery(query);
         pista.next();
-        Integer ID = pista.getInt(1);
-        Float precio = pista.getFloat(2);
-        Integer activo = pista.getInt(3);
-        pistas placeholder = new pistas(ID,precio,activo);
+        String ID = pista.getString(1);
+        String condicion = pista.getString(2);
+        Float precio = pista.getFloat(3);
+        Integer activo = pista.getInt(4);
+        pistas placeholder = new pistas(ID,condicion,precio,activo);
         return placeholder;
+    }
 
+    public ResultSet pistasReservar() throws SQLException {
+        String query = "SELECT * FROM pistas WHERE activa LIKE '1'";
+        ResultSet pistas = f.ejecutarQuery(query);
+        return pistas;
     }
 
     public void addUser(String dni, String mail, String nombre, String apellidos, String passwd, Boolean activo) throws SQLException {
@@ -141,9 +153,8 @@ public class controlador {
         view.setVisible(true);
     }
 
-    public void openReservas(){
+    public void openReservas() throws SQLException {
         reservas main = new reservas();
-        main.setCalendario();
         view.setContentPane(main.panel1);
         view.setSize(500,500);
         view.setVisible(true);
@@ -174,7 +185,6 @@ public class controlador {
         formPistas form = new formPistas();
         view.setContentPane(form.panel1);
         view.setSize(750,500);
-        form.start();
         view.setVisible(true);
     }
 
@@ -207,7 +217,7 @@ public class controlador {
         ResultSet pistasResult = f.ejecutarQuery("SELECT * FROM pistas");
         ArrayList<String> pista = new ArrayList<>();
         while(pistasResult.next()){
-            pistas p = new pistas(pistasResult.getInt(1),pistasResult.getFloat(2),pistasResult.getInt(3));
+            pistas p = new pistas(pistasResult.getString(1),pistasResult.getInt(4));
             pista.add(p.toString());
         }
         return pista;

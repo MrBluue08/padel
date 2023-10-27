@@ -9,13 +9,13 @@ import Controllers.controlador;
 
 public class mainAdmin {
     controlador c = new controlador();
-    private JButton addBtn;
+    private JButton pistasBtn;
     public JPanel panel1;
-    private JButton editBtn;
+    private JButton userBtn;
     private JButton closeBtn;
 
     public mainAdmin() {
-        addBtn.addActionListener(new ActionListener() {
+        pistasBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -25,7 +25,7 @@ public class mainAdmin {
                 }
             }
         });
-        editBtn.addActionListener(new ActionListener() {
+        userBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -35,5 +35,9 @@ public class mainAdmin {
                 }
             }
         });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

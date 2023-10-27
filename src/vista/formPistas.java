@@ -5,10 +5,12 @@ import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Controllers.*;
+import Models.pistas;
 
 public class formPistas {
     public controlador c = new controlador();
     public JList<String> listadoPistas = new JList(cargarIds());
+    public String id;
 
 
     public DefaultListModel cargarIds() throws SQLException {
@@ -23,6 +25,25 @@ public class formPistas {
         return pistasModelo;
     }
 
+    public void editMode(){
+        buscadorBtn.setVisible(true);
+        buscadorLbl.setVisible(true);
+        buscadorTxt.setVisible(true);
+        editBtn.setVisible(true);
+        editModeBtn.setVisible(false);
+        addModeBtn.setVisible(true);
+        addBtn.setVisible(false);
+    }
+    public void addMode(){
+        addModeBtn.setVisible(false);
+        addBtn.setVisible(true);
+        buscadorBtn.setVisible(false);
+        buscadorLbl.setVisible(false);
+        buscadorTxt.setVisible(false);
+        editBtn.setVisible(false);
+        editModeBtn.setVisible(true);
+    }
+
 
 
     public JPanel panel1;
@@ -33,17 +54,20 @@ public class formPistas {
     private JLabel idLbl;
     private JLabel precioLbl;
     private JButton backBtn;
-    private JLabel idTxt;
     private JTextField buscadorTxt;
     private JButton buscadorBtn;
     private JLabel buscadorLbl;
+    private JButton editModeBtn;
+    private JButton addModeBtn;
+    private JTextField condicionTxt;
+    private JLabel condicionLbl;
+    private JTextField idTxt;
 
     Icon icon = new ImageIcon("img/backArrow.png");
-    public void start(){
-        backBtn.setIcon(icon);
-    }
 
     public formPistas() throws SQLException {
+        backBtn.setIcon(icon);
+        addMode();
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,7 +78,7 @@ public class formPistas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    c.addPista(precioTxt.getText(),activoCheckBox.isSelected());
+                    c.addPista(idTxt.getText(),condicionTxt.getText(),precioTxt.getText(),activoCheckBox.isSelected());
                     c.openPistas();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -66,19 +90,22 @@ public class formPistas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Integer id = c.selectPista(buscadorTxt.getText()).getId();
-                    Float precio = c.selectPista(buscadorTxt.getText()).getPrecioHora();
-                    Integer activo = c.selectPista(buscadorTxt.getText()).getActivo();
-                    idTxt.setText(id.toString());
+                    id = buscadorTxt.getText();
+                    pistas pista = c.selectPista(buscadorTxt.getText());
+                    String ID_pista = pista.getId();
+                    String condicion = pista.getCondicion();
+                    Float precio = pista.getPrecioHora();
+                    Integer activo = pista.getActivo();
+                    idTxt.setText(ID_pista);
+                    condicionTxt.setText(condicion);
+                    condicionTxt.setText(condicion);
                     precioTxt.setText(precio.toString());
                     if (activo==1){
                         activoCheckBox.setSelected(true);
                     }else{
                         activoCheckBox.setSelected(false);
                     }
-
                 } catch (SQLException ex) {
-                    idTxt.setText("Sin resultados");
                     throw new RuntimeException(ex);
                 }
             }
@@ -86,7 +113,6 @@ public class formPistas {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = idTxt.getText();
                 String precio = precioTxt.getText();
                 Boolean activo = activoCheckBox.isSelected();
                 try {
@@ -98,9 +124,20 @@ public class formPistas {
                 }
             }
         });
+        editModeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editMode();
+
+            }
+        });
+        addModeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addMode();
+            }
+        });
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
+
 }

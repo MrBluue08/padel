@@ -6,6 +6,11 @@ public class pistas {
 
     public pistas(){};
 
+    public pistas(String id, int activo) {
+        this.id = id;
+        this.activo = activo;
+    }
+
 
     @Override
     public String toString() {
@@ -16,29 +21,41 @@ public class pistas {
             active = "No";
         }
         return  "ID: " + id +
-                " ,Precio: " + precioHora +
-                " ,Activo: " + active+"    ";
+                " ,Activo: " +active+"    ";
     }
 
-    public pistas(int id, float precioHora, int activo){
+    public pistas(String id, String condicion,float precioHora, int activo){
         this.id = id;
+        this.condicion = condicion;
         this.precioHora = precioHora;
         this.activo = activo;
     };
-    private int id;
+
+    //variables
+    private String id;
+    private String name;
+    private String condicion;
     private float precioHora;
     private int activo;
 
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
 
+    //setter & getter
+
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+
+
+    public String getCondicion() {return condicion;}
+    public void setCondicion(String condicion) {this.condicion = condicion;}
 
     public float getPrecioHora() {return precioHora;}
-
     public void setPrecioHora(int precioHora) {this.precioHora = precioHora;}
 
-    public int getActivo() {return activo;}
 
+    public int getActivo() {return activo;}
     public void setActivo(int Activo) {this.activo = Activo;}
 
 
