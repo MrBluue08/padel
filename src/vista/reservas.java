@@ -9,19 +9,23 @@ import java.sql.SQLException;
 
 public class reservas {
     public JPanel panel1;
+    private JPanel lista;
     private JScrollPane contenedorScroll;
-    private JPanel container = new JPanel(new WrapLayout());
     private controlador c = new controlador();
 
     public reservas() throws SQLException{
-        ResultSet pistas = c.pistasReservar();
+        lista.setLayout(new GridLayout(0,3,0,10));
+//        listado.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
 
+        ResultSet pistas = c.pistasReservar();
         while(pistas.next()){
-            JButton boton = new JButton();
+            JButton boton = new JButton("Hey");
             JPanel panel = new JPanel();
             panel.add(boton);
-            container.add(panel);
+            lista.add(panel);
         }
-        contenedorScroll.add(container);
+
     }
+
+
 }

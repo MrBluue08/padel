@@ -113,10 +113,11 @@ public class formPistas {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nuevoID = idTxt.getText();
                 String precio = precioTxt.getText();
                 Boolean activo = activoCheckBox.isSelected();
                 try {
-                    c.updatePista(id,precio,activo);
+                    c.updatePista(id,nuevoID,precio,activo);
                     c.openPistas();
                 } catch (SQLException ex) {
 

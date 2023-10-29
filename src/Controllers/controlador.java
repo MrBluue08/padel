@@ -34,14 +34,14 @@ public class controlador {
         f.update(query);
     }
 
-    public void updatePista(String id, String precio, Boolean activo) throws SQLException {
+    public void updatePista(String id, String idNuevo,String precio, Boolean activo) throws SQLException {
         String active = "";
         if(activo==true){
             active = "1";
         }else{
             active = "0";
         }
-        String query = "UPDATE `pistas` SET `Precio_por_hora`='"+precio+"',`activa`='"+active+"' WHERE ID_pista LIKE '"+id+"';";
+        String query = "UPDATE `pistas` SET  `ID_pista`='"+idNuevo+"',`Precio_por_hora`='"+precio+"',`activa`='"+active+"' WHERE ID_pista LIKE '"+id+"';";
         f.update(query);
     }
 
@@ -156,7 +156,7 @@ public class controlador {
     public void openReservas() throws SQLException {
         reservas main = new reservas();
         view.setContentPane(main.panel1);
-        view.setSize(500,500);
+        view.setSize(1000,1000);
         view.setVisible(true);
     }
 
