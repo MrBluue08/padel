@@ -170,8 +170,6 @@ public class controlador {
         System.out.println(u.getDni());
     }
 
-
-
     public void openPerfil(usuarios user){
         perfilUser perfil = new perfilUser();
         view.setContentPane(perfil.panel1);
