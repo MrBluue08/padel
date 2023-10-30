@@ -4,59 +4,67 @@ import com.toedter.calendar.JCalendar;
 import javax.swing.*;
 import Controllers.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
+
 public class reservas {
-    public JPanel panel1;
-    private JPanel lista;
-    private JScrollPane contenedorScroll;
+    public JPanel main;
     private controlador c = new controlador();
 
+
     public reservas() throws SQLException{
-        lista.setLayout(new GridLayout(0,3,0,10));
+        main.setLayout(new FlowLayout());
 
-        ResultSet pistas = c.pistasReservar();
-        while(pistas.next()){
-            JPanel panel = new JPanel(new GridLayout(3,2,5,5));
-
-            JButton boton = new JButton(pistas.getString(1));
-            JCalendar calendario = new JCalendar();
-
-            ArrayList<String> listaHoras = new ArrayList<>();
-            for (int hora = 9; hora <= 22; hora++) {
-                for (int minuto = 0; minuto <= 30; minuto += 30) {
-                    String horaStr = String.format("%02d:%02d", hora, minuto);
-                    listaHoras.add(horaStr);
-                }
+        ArrayList<JButton> botones = new ArrayList<>();
+        JCalendar calendario = new JCalendar();
+        ArrayList<String> listaHoras = new ArrayList<>();
+        for (int hora = 9; hora <= 22; hora++) {
+            for (int minuto = 0; minuto <= 30; minuto += 30) {
+                String horaStr = String.format("%02d:%02d", hora, minuto);
+                listaHoras.add(horaStr);
             }
-
-            JComboBox<String> horaInicio = new JComboBox<>(listaHoras.toArray(new String[0]));
-            JComboBox<String> horaFin = new JComboBox<>(listaHoras.toArray(new String[0]));
-
-            boton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e){
-                    if(calendario.isVisible()){
-                        calendario.setVisible(false);
-                    }else{
-                        calendario.setVisible(true);
-                    }
-                }
-            });
-            panel.add(boton);
-            panel.add(calendario);
-            calendario.setVisible(false);
-            panel.add(horaInicio);
-            panel.add(horaFin);
-            lista.add(panel);
         }
 
+        JComboBox<String> horaInicio = new JComboBox<>(listaHoras.toArray(new String[0]));
+        JComboBox<String> horaFin = new JComboBox<>(listaHoras.toArray(new String[0]));
+
+        JPanel panelPistas = new JPanel(new GridLayout(2,2));
+
+
+        main.add(calendario);
+        main.add(horaInicio);
+        main.add(horaFin);
+        main.add(panelPistas);
+        panelPistas.setVisible(false);
+
+        horaFin.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e){
+                for (JButton boton:botones) {
+                    panelPistas.remove(boton);
+                }
+                panelPistas.setVisible(true);
+                ArrayList<String> pistas = null;
+                try {
+                    pistas = c.pistasDisponibles(horaInicio.getSelectedItem().toString(), horaFin.getSelectedItem().toString());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                for (String pista: pistas) {
+                    JButton boton = new JButton(pista);
+                    botones.add(boton);
+                    panelPistas.add(boton);
+                }
+            }
+        });
+
     }
+
+
 
 
 }

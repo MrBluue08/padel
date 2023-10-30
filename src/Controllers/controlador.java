@@ -68,6 +68,24 @@ public class controlador {
         return pistas;
     }
 
+    public ArrayList<String> pistasDisponibles(String horaInicio, String horaFin) throws SQLException {
+        String query = "SELECT ID_pista FROM reservas WHERE horaInicio LIKE '"+horaInicio+"'" +
+                "AND fechaFin LIKE '"+horaFin+"'";
+        ResultSet pistasReservadas = f.ejecutarQuery(query);
+        String ids = "";
+        while(pistasReservadas.next()){
+            ids += ",'"+pistasReservadas.getString(1)+"'";
+        }
+        query = "SELECT * FROM pistas WHERE ID_pista NOT IN (''"+ids+")";
+        System.out.println(query);
+        ResultSet pistasLibres = f.ejecutarQuery(query);
+        ArrayList<String> ID = new ArrayList<>();
+        while(pistasLibres.next()){
+            ID.add(pistasLibres.getString(1));
+        }
+        return ID;
+    }
+
     public void addUser(String dni, String mail, String nombre, String apellidos, String passwd, Boolean activo) throws SQLException {
         String active = "";
         if(activo){
@@ -155,8 +173,8 @@ public class controlador {
 
     public void openReservas() throws SQLException {
         reservas main = new reservas();
-        view.setContentPane(main.panel1);
-        view.setSize(1000,1000);
+        view.setContentPane(main.main);
+        view.setSize(750,500);
         view.setVisible(true);
     }
 
