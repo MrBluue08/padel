@@ -3,7 +3,9 @@ package vista;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
+
 
 import Controllers.*;
 import Models.usuarios;
@@ -36,7 +38,7 @@ public class mainUsuarios {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    c.openReservas();
+                    c.openReservas(null,"09:00","10:00", new java.util.Date());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

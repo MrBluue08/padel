@@ -2,10 +2,14 @@ package Controllers;
 
 import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import vista.*;
 import Models.*;
+
+import javax.swing.*;
 
 public class controlador {
     Funciones f = new Funciones();
@@ -68,13 +72,21 @@ public class controlador {
         return pistas;
     }
 
-    public ArrayList<String> pistasDisponibles(String horaInicio, String horaFin) throws SQLException {
-        String query = "SELECT ID_pista FROM reservas WHERE horaInicio LIKE '"+horaInicio+"'" +
-                "AND fechaFin LIKE '"+horaFin+"'";
+    public ArrayList<String> pistasDisponibles(java.util.Date date, String horaInicio) throws SQLException, ParseException {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("E MMM dd zz yyyy");
+        String fecha = formatoFecha.format(date);
+        String query = "SELECT ID_pista,horaFin FROM reservas WHERE Fecha LIKE '"+fecha+"'";
+        System.out.println(query);
         ResultSet pistasReservadas = f.ejecutarQuery(query);
         String ids = "";
         while(pistasReservadas.next()){
-            ids += ",'"+pistasReservadas.getString(1)+"'";
+            String id = pistasReservadas.getString(1);
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+            Boolean horaOk = formatoHora.parse(horaInicio).before(formatoHora.parse(pistasReservadas.getString(2)));
+            System.out.println(horaOk);
+            if(horaOk){
+                ids += ",'"+id+"'";
+            }
         }
         query = "SELECT * FROM pistas WHERE ID_pista NOT IN (''"+ids+")";
         System.out.println(query);
@@ -85,6 +97,12 @@ public class controlador {
         }
         return ID;
     }
+
+    public void reservar(ArrayList<String> datos){
+
+
+    }
+
 
     public void addUser(String dni, String mail, String nombre, String apellidos, String passwd, Boolean activo) throws SQLException {
         String active = "";
@@ -171,8 +189,8 @@ public class controlador {
         view.setVisible(true);
     }
 
-    public void openReservas() throws SQLException {
-        reservas main = new reservas();
+    public void openReservas(ArrayList<JButton> btns, String start, String end, java.util.Date fecha) throws SQLException {
+        reservas main = new reservas(btns,start,end,fecha);
         view.setContentPane(main.main);
         view.setSize(750,500);
         view.setVisible(true);
