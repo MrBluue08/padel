@@ -38,7 +38,7 @@ public class mainUsuarios {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    c.openReservas(null,"09:00","10:00", new java.util.Date());
+                    c.openReservas(null,"09:00","10:00", new java.util.Date(),user);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

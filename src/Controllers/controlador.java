@@ -91,14 +91,22 @@ public class controlador {
         query = "SELECT * FROM pistas WHERE ID_pista NOT IN (''"+ids+")";
         System.out.println(query);
         ResultSet pistasLibres = f.ejecutarQuery(query);
-        ArrayList<String> ID = new ArrayList<>();
+        ArrayList<String> listaID = new ArrayList<>();
         while(pistasLibres.next()){
-            ID.add(pistasLibres.getString(1));
+            listaID.add(pistasLibres.getString(1));
         }
-        return ID;
+        return listaID;
     }
 
-    public void reservar(ArrayList<String> datos){
+    public void reservar(ArrayList<String> datos) throws SQLException {
+        String fecha = datos.get(0);
+        String horaInicio = datos.get(1);
+        String horaFin = datos.get(2);
+        String dni = datos.get(3);
+        String ID_pista = datos.get(4);
+        String query = "INSERT INTO `reservas`(`Fecha`, `horaInicio`, `horaFin`, `dni`, `ID_pista`) " +
+                "VALUES ('"+fecha+"','"+horaInicio+"','"+horaFin+"','"+dni+"','"+ID_pista+"')";
+        f.update(query);
 
 
     }
@@ -189,8 +197,8 @@ public class controlador {
         view.setVisible(true);
     }
 
-    public void openReservas(ArrayList<JButton> btns, String start, String end, java.util.Date fecha) throws SQLException {
-        reservas main = new reservas(btns,start,end,fecha);
+    public void openReservas(ArrayList<JButton> btns, String start, String end, java.util.Date fecha, usuarios user) throws SQLException {
+        reservas main = new reservas(btns,start,end,fecha,user);
         view.setContentPane(main.main);
         view.setSize(750,500);
         view.setVisible(true);

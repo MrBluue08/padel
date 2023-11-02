@@ -1,5 +1,6 @@
 package vista;
 
+import Models.usuarios;
 import com.toedter.calendar.JCalendar;
 import javax.swing.*;
 import Controllers.*;
@@ -20,7 +21,7 @@ public class reservas {
     public JPanel main;
     private controlador c = new controlador();
 
-    public reservas(ArrayList<JButton> buttons, String start, String end, Date fecha) throws SQLException{
+    public reservas(ArrayList<JButton> buttons, String start, String end, Date fecha, usuarios user){
         main.setLayout(new FlowLayout());
 
         JCalendar calendario = new JCalendar();
@@ -73,22 +74,23 @@ public class reservas {
                             ArrayList<String> datos = new ArrayList<>();
                             SimpleDateFormat formatoFecha = new SimpleDateFormat("E MMM dd zz yyyy");
                             String fecha = formatoFecha.format(calendario.getDate());
-                            datos.add(boton.getText());
+                            datos.add(fecha);
                             datos.add(horaInicio.getSelectedItem().toString());
                             datos.add(horaFin.getSelectedItem().toString());
-                            datos.add(fecha);
+                            datos.add(user.getDni());
+                            datos.add(boton.getText());
                             popUp ventana = new popUp("Reservar pista "+boton.getText()+" de "+horaInicio.getSelectedItem().toString()
                                     +" a "+horaFin.getSelectedItem().toString()+" el "+fecha+ "?",datos);
                             placeHolder placeHolder = new placeHolder();
                             placeHolder.setContentPane(ventana.panel1);
-                            placeHolder.setSize(250,250);
+                            placeHolder.setSize(500,250);
                             placeHolder.setVisible(true);
 
                         }
                     });
                 }
                 try {
-                    c.openReservas(botones, horaInicio.getSelectedItem().toString(), horaFin.getSelectedItem().toString(),calendario.getDate());
+                    c.openReservas(botones, horaInicio.getSelectedItem().toString(), horaFin.getSelectedItem().toString(),calendario.getDate(), user);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

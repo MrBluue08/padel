@@ -27,11 +27,6 @@ public class perfilUser {
 
     controlador controlador = new controlador();
     Icon icon = new ImageIcon("img/backArrow.png");
-
-
-
-
-
     public void viewMode(){
         editMail.setVisible(false);
         editName.setVisible(false);

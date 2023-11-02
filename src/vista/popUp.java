@@ -5,6 +5,7 @@ import Controllers.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class popUp {
@@ -19,7 +20,13 @@ public class popUp {
         acceptBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.reservar(datos);
+                try {
+                    c.reservar(datos);
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                    frame.dispose();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
