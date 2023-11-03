@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.io.IOException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -199,7 +198,7 @@ public class controlador {
 
     public void openReservas(ArrayList<JButton> btns, String start, String end, java.util.Date fecha, usuarios user) throws SQLException {
         reservas main = new reservas(btns,start,end,fecha,user);
-        view.setContentPane(main.main);
+        view.setContentPane(main.panel1);
         view.setSize(750,500);
         view.setVisible(true);
     }
@@ -221,6 +220,36 @@ public class controlador {
         fillInfoUser(user, perfil);
         perfil.viewMode();
         view.setVisible(true);
+    }
+
+    public void openMisReservas(usuarios user) throws SQLException {
+        misReservas vista = new misReservas(user);
+        view.setContentPane(vista.panel1);
+        view.setSize(500,500);
+        view.setVisible(true);
+    }
+
+    public ArrayList<ArrayList<String>> selectReservas(String dni) throws SQLException{
+        String query = "SELECT * FROM reservas WHERE dni LIKE '"+dni+"';";
+        ResultSet reservas = f.ejecutarQuery(query);
+        ArrayList<ArrayList<String>> listaReservas = new ArrayList<>();
+        while(reservas.next()){
+            ArrayList<String> datos = new ArrayList<>();
+            datos.add(reservas.getString(1));
+            datos.add(reservas.getString(2));
+            datos.add(reservas.getString(3));
+            datos.add(reservas.getString(4));
+            datos.add(reservas.getString(6));
+            listaReservas.add(datos);
+        }
+
+        return listaReservas;
+
+    }
+
+    public void dropReserva(String id) throws SQLException {
+        String query = "DELETE FROM reservas WHERE id_reserva LIKE '"+id+"';";
+        f.update(query);
     }
 
     public void openPistas() throws SQLException{

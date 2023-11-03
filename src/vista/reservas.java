@@ -7,9 +7,6 @@ import Controllers.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,8 +15,12 @@ import java.util.Date;
 
 
 public class reservas {
-    public JPanel main;
+    public JPanel panel1;
+    private JPanel main;
+    private JButton backBtn;
     private controlador c = new controlador();
+    Icon icon = new ImageIcon("img/backArrow.png");
+
 
     public reservas(ArrayList<JButton> buttons, String start, String end, Date fecha, usuarios user){
         main.setLayout(new FlowLayout());
@@ -52,6 +53,13 @@ public class reservas {
         main.add(horaFin);
         main.add(pistasDisponiblesBtn);
         main.add(panelPistas);
+        backBtn.setIcon(icon);
+        backBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.openMainUser(user);
+            }
+        });
 
         pistasDisponiblesBtn.addActionListener(new ActionListener() {
             @Override

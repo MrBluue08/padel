@@ -35,6 +35,12 @@ public class mainAdmin {
                 }
             }
         });
+        closeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     private void createUIComponents() {
