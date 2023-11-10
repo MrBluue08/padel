@@ -1,5 +1,7 @@
 package Controllers;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,12 +68,6 @@ public class controlador {
         return placeholder;
     }
 
-    public ResultSet pistasReservar() throws SQLException {
-        String query = "SELECT * FROM pistas WHERE activa LIKE '1'";
-        ResultSet pistas = f.ejecutarQuery(query);
-        return pistas;
-    }
-
     public ArrayList<String> pistasDisponibles(java.util.Date date, String horaInicio) throws SQLException, ParseException {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("E MMM dd zz yyyy");
         String fecha = formatoFecha.format(date);
@@ -120,11 +116,22 @@ public class controlador {
              active = "0";
         }
         String query = "";
-        if(!dni.equals("")){
-            query = "INSERT INTO `usuarios`(`dni`, `Email`, `Nombre`, `Apellidos`, `passwd`, `active`)" +
-                    "VALUES ('"+dni+"',"+"'"+mail+"','"+nombre+"','"+apellidos+"','"+passwd+"','"+active+"')";
-            f.update(query);
+
+        try{
+            MessageDigest encriptador = MessageDigest.getInstance("MD5");
+            byte[] passwordBytes = passwd.getBytes();
+            encriptador.update(passwordBytes);
+            byte[] encriptado = encriptador.digest();
+            System.out.println(encriptado);
+            if(!dni.equals("")){
+                query = "INSERT INTO `usuarios`(`id`, `Email`, `Nombre`, `Apellidos`, `password`, `active`)" +
+                        "VALUES ('"+dni+"',"+"'"+mail+"','"+nombre+"','"+apellidos+"','"+encriptado+"','"+active+"')";
+                f.update(query);
+            }
+        }catch(NoSuchAlgorithmException e){
+
         }
+
 
     }
 
