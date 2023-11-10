@@ -34,10 +34,10 @@ public class misReservas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] info = list1.getSelectedValue().toString().split(",");
-                popUp ventana = new popUp("Estas seguro de que quieres cancelar la siguiente reserva: "+info.toString(), info[0], user);
+                popUp ventana = new popUp("Estas seguro de que quieres cancelar la siguiente reserva: "+info[0]+ " para el " +info[1]+ " de " +info[2] +" a"+ info[3] , info[0], user);
                 placeHolder placeHolder = new placeHolder();
                 placeHolder.setContentPane(ventana.panel1);
-                placeHolder.setSize(500,250);
+                placeHolder.setSize(800,250);
                 placeHolder.setVisible(true);
 
             }

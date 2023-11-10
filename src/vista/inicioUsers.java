@@ -15,11 +15,15 @@ public class inicioUsers {
     private JLabel passwdLbl;
     private JButton startSesionBtn;
     public JLabel errorLbl;
+    private JButton adminBtn;
+    Icon icon = new ImageIcon("img/puntos.png");
+
     controlador c = new controlador();
 
 
 
     public inicioUsers() {
+        adminBtn.setIcon(icon);
         startSesionBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,6 +32,12 @@ public class inicioUsers {
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        adminBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.openInicioAdmin();
             }
         });
     }

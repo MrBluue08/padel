@@ -13,6 +13,7 @@
           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Trebuchet MS"/>
           <text value="ID:"/>
         </properties>
       </component>
@@ -21,6 +22,7 @@
           <grid row="11" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Trebuchet MS"/>
           <text value="Precio:"/>
         </properties>
       </component>
@@ -39,6 +41,7 @@
           <grid row="3" column="2" row-span="5" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Trebuchet MS"/>
           <text value="Buscador:"/>
         </properties>
       </component>
@@ -135,6 +138,7 @@
           <grid row="9" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Trebuchet MS"/>
           <text value="Condicion:"/>
         </properties>
       </component>
