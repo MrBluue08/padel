@@ -48,4 +48,21 @@ public class popUp {
             }
         });
     }
+
+    public popUp(String mensaje){
+        lblTexto.setText(mensaje);
+        acceptBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                    frame.dispose();
+                    c.openListUsers();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+    }
 }

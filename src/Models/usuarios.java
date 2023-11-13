@@ -7,6 +7,8 @@ public class usuarios {
     String apellidos;
     String passwd;
 
+    Boolean active;
+
     public usuarios(String dni) {
         this.dni = dni;
     }
@@ -18,12 +20,13 @@ public class usuarios {
         this.apellidos = apellidos;
         this.passwd = passwd;
     }
-
-    public usuarios(String dni, String mail, String nombre, String apellidos) {
+    public usuarios(String dni, String mail, String nombre, String apellidos, String passwd, Boolean active) {
         this.dni = dni;
         this.mail = mail;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.passwd = passwd;
+        this.active = active;
     }
 
     public usuarios(){}
@@ -72,4 +75,13 @@ public class usuarios {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
 }
