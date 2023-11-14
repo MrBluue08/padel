@@ -215,6 +215,8 @@ public class controlador {
 
               usuarios user = new usuarios(resultado.getString(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5));
         String activo = resultado.getString(6);
+        System.out.println(pass);
+        System.out.println(encriptado);
         if (pass.equals(encriptado) && Integer.parseInt(activo) == 1) {
             openMainUser(user);
         } else if (Integer.parseInt(activo) == 0) {

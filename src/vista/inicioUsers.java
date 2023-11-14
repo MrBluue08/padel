@@ -1,9 +1,11 @@
 package vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.awt.image.BufferedImage;
 
 import Controllers.*;
 
@@ -16,7 +18,9 @@ public class inicioUsers {
     private JButton startSesionBtn;
     public JLabel errorLbl;
     private JButton adminBtn;
+    private JLabel logoPos;
     Icon icon = new ImageIcon("img/puntos.png");
+    Icon logo = new ImageIcon("img/padelLogo.png");
 
     controlador c = new controlador();
 
@@ -24,6 +28,7 @@ public class inicioUsers {
 
     public inicioUsers() {
         adminBtn.setIcon(icon);
+        logoPos.setIcon(logo);
         startSesionBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

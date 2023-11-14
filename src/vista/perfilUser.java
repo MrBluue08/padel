@@ -1,7 +1,6 @@
 package vista;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ public class perfilUser {
     private JPasswordField editPasswd;
 
 
-    controlador controlador = new controlador();
+    controlador c = new controlador();
     Icon icon = new ImageIcon("img/backArrow.png");
     public void viewMode(){
         editMail.setVisible(false);
@@ -51,8 +50,6 @@ public class perfilUser {
         passwdTxt.setVisible(false);
         editMail.setText(mailTxt.getText());
         editName.setText(nameTxt.getText());
-        String passwd = (String) passwdTxt.getClientProperty("passwd");
-        editPasswd.setText(passwd);
     }
 
     public perfilUser() {
@@ -67,7 +64,7 @@ public class perfilUser {
             public void actionPerformed(ActionEvent e) {
                 String[] nombre = editName.getText().split(" ");
                 try {
-                    controlador.updateUser(dniTxt.getText(),editMail.getText(),nombre[0],nombre[1], editPasswd.getText(),true);
+                    c.updateUser(dniTxt.getText(),editMail.getText(),nombre[0],nombre[1], editPasswd.getText(),true);
                     viewMode();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -87,7 +84,7 @@ public class perfilUser {
                     String passwd = (String) passwdTxt.getClientProperty("passwd");
                     user = new usuarios(dniTxt.getText(),mailTxt.getText(),nombre[0],nombre[1],passwd);
                 }
-                controlador.openMainUser(user);
+                c.openMainUser(user);
             }
         });
     }
