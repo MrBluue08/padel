@@ -1,6 +1,8 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class formPistas {
     private JLabel condicionLbl;
     private JTextField idTxt;
     private JButton saveBtn;
+    private JButton cancelBtn;
 
     Icon icon = new ImageIcon("img/backArrow.png");
     String idPlaceholder = null;
@@ -66,6 +69,7 @@ public class formPistas {
         backBtn.setIcon(icon);
         cargarIds();
         saveBtn.setVisible(false);
+        cancelBtn.setVisible(false);
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,18 +94,9 @@ public class formPistas {
                 idPlaceholder = buscadorTxt.getText();
                 fillDatos(buscadorTxt.getText());
                 saveBtn.setVisible(true);
+                cancelBtn.setVisible(true);
                 addBtn.setVisible(false);
 
-            }
-        });
-        editBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String[] datos = listadoPistas.getSelectedValue().toString().split(" ");
-                idPlaceholder = datos[1];
-                fillDatos(datos[1]);
-                saveBtn.setVisible(true);
-                addBtn.setVisible(false);
             }
         });
         saveBtn.addActionListener(new ActionListener() {
@@ -119,6 +114,29 @@ public class formPistas {
 
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        listadoPistas.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String[] datos = listadoPistas.getSelectedValue().toString().split(" ");
+                idPlaceholder = datos[1];
+                fillDatos(datos[1]);
+                saveBtn.setVisible(true);
+                addBtn.setVisible(false);
+                cancelBtn.setVisible(true);
+            }
+        });
+        cancelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveBtn.setVisible(false);
+                addBtn.setVisible(true);
+                cancelBtn.setVisible(false);
+                idTxt.setText("");
+                condicionTxt.setText("");
+                condicionTxt.setText("");
+                precioTxt.setText("");
             }
         });
     }

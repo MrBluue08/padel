@@ -33,6 +33,7 @@ public class usersForm {
     public JList listaDni;
     private JButton backBtn;
     private JLabel mostrarDni;
+    private JButton cancelBtn;
 
     controlador c = new controlador();
     Icon icon = new ImageIcon("img/backArrow.png");
@@ -68,6 +69,7 @@ public class usersForm {
         backBtn.setIcon(icon);
         editBtn.setVisible(false);
         mostrarDni.setVisible(false);
+        cancelBtn.setVisible(false);
         cargarDni();
 
         addBtn.addActionListener(new ActionListener() {
@@ -122,6 +124,7 @@ public class usersForm {
             public void valueChanged(ListSelectionEvent e) {
                 addBtn.setVisible(false);
                 editBtn.setVisible(true);
+                cancelBtn.setVisible(true);
                 String dato = listaDni.getSelectedValue().toString();
                 String[] datos = dato.split(" ");
                 try {
@@ -129,6 +132,21 @@ public class usersForm {
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        cancelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDni.setVisible(false);
+                editBtn.setVisible(false);
+                cancelBtn.setVisible(false);
+                addBtn.setVisible(true);
+                dniTxt.setVisible(true);
+                mailTxt.setText("");
+                nameTxt.setText("");
+                surnameTxt.setText("");
+                passwdTxt.setText("");
+                checkActive.setSelected(false);
             }
         });
     }
