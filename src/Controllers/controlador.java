@@ -20,7 +20,7 @@ public class controlador {
     public static void main(String[] args){
         inicioUsers vista = new inicioUsers();
         view.setContentPane(vista.panel1);
-        view.setSize(500,500);
+        view.setSize(250,400);
         vista.errorLbl.setVisible(false);
         view.setVisible(true);
     }
@@ -351,7 +351,7 @@ public class controlador {
     public void cerrarSesion() {
         inicioUsers form = new inicioUsers();
         view.setContentPane(form.panel1);
-        view.setSize(500,500);
+        view.setSize(250,400);
         form.errorLbl.setVisible(false);
         view.setVisible(true);
     }

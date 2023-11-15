@@ -18,6 +18,8 @@ public class reservas {
     public JPanel panel1;
     private JPanel main;
     private JButton backBtn;
+    private JScrollPane botones;
+    private JPanel panelBtns;
     private controlador c = new controlador();
     Icon icon = new ImageIcon("img/backArrow.png");
 
@@ -27,6 +29,10 @@ public class reservas {
 
         JCalendar calendario = new JCalendar();
         calendario.setDate(fecha);
+        calendario.setForeground(Color.decode("#0C5149"));
+
+
+
         JButton pistasDisponiblesBtn = new JButton("Pistas disponibles");
         ArrayList<String> listaHoras = new ArrayList<>();
         for (int hora = 9; hora <= 22; hora++) {
@@ -52,7 +58,7 @@ public class reservas {
         main.add(horaInicio);
         main.add(horaFin);
         main.add(pistasDisponiblesBtn);
-        main.add(panelPistas);
+        panelBtns.add(panelPistas);
         backBtn.setIcon(icon);
         backBtn.addActionListener(new ActionListener() {
             @Override
@@ -75,6 +81,9 @@ public class reservas {
                 ArrayList<JButton> botones = new ArrayList<>();
                 for (String pista:pistas) {
                     JButton boton = new JButton(pista);
+                    boton.setBackground(Color.decode("#07F9A2"));
+                    boton.setForeground(Color.decode("#0C5149"));
+
                     botones.add(boton);
                     boton.addActionListener(new ActionListener() {
                         @Override

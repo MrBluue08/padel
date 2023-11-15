@@ -18,9 +18,20 @@ public class mainUsuarios {
     controlador c = new controlador();
     public static usuarios user = new usuarios();
 
+    Icon exitIcon = new ImageIcon("img/exitSing.png");
+    Icon reservasIcon = new ImageIcon("img/reserva.png");
+    Icon miPerfilIcon = new ImageIcon("img/miPerfil.png");
+    Icon misReservasIcon = new ImageIcon("img/misReservas.png");
+
+
 
 
     public mainUsuarios() {
+        closeBtn.setIcon(exitIcon);
+        reservasBtn.setIcon(reservasIcon);
+        miPerfilBtn.setIcon(miPerfilIcon);
+        misReservasButton.setIcon(misReservasIcon);
+
         miPerfilBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
