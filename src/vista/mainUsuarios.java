@@ -42,7 +42,7 @@ public class mainUsuarios {
         closeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 c.cerrarSesion();
+                 c.openInicioUsers(false,"");
             }
         });
         reservasBtn.addActionListener(new ActionListener() {
