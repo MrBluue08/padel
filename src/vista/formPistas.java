@@ -106,9 +106,10 @@ public class formPistas {
                 addBtn.setVisible(true);
                 String nuevoID = idTxt.getText();
                 String precio = precioTxt.getText();
+                String condicion = condicionTxt.getText();
                 Boolean activo = activoCheckBox.isSelected();
                 try {
-                    c.updatePista(idPlaceholder,nuevoID,precio,activo);
+                    c.updatePista(idPlaceholder,nuevoID,condicion,precio,activo);
                     c.openPistas();
                 } catch (SQLException ex) {
 

@@ -89,7 +89,7 @@ public class reservas {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             ArrayList<String> datos = new ArrayList<>();
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("E MMM dd zz yyyy");
+                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                             String fecha = formatoFecha.format(calendario.getDate());
                             datos.add(fecha);
                             datos.add(horaInicio.getSelectedItem().toString());

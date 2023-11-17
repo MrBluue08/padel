@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import vista.*;
@@ -35,7 +37,7 @@ public class controlador {
          f.update(query);
     }
 
-    public static void updatePista(String id, String idNuevo,String precio, Boolean activo) throws SQLException {
+    public static void updatePista(String id, String idNuevo, String condicion,String precio, Boolean activo) throws SQLException {
         String active = "";
         if(activo==true){
             active = "1";
@@ -43,8 +45,9 @@ public class controlador {
             active = "0";
         }
         String updateReservas = "UPDATE `reservas` SET `ID_pista`='0' WHERE ID_pista LIKE '"+id+"';";
-        String query = "UPDATE `pistas` SET  `ID_pista`='"+idNuevo+"',`Precio_por_hora`='"+precio+"',`activa`='"+active+"' WHERE ID_pista LIKE '"+id+"';";
+        String query = "UPDATE `pistas` SET  `ID_pista`='"+idNuevo+"',`condicion`='"+condicion+"',`Precio_por_hora`='"+precio+"',`activa`='"+active+"' WHERE ID_pista LIKE '"+id+"';";
         System.out.println(updateReservas);
+        System.out.println(query);
         f.update(updateReservas);
         f.update(query);
         updateReservas = "UPDATE `reservas` SET `ID_pista`='"+idNuevo+"' WHERE ID_pista LIKE '0';";
@@ -281,11 +284,17 @@ public class controlador {
         while(reservas.next()){
             ArrayList<String> datos = new ArrayList<>();
             datos.add(reservas.getString(1));
-            datos.add(reservas.getString(2));
+            String fecha = reservas.getString(2);
+            datos.add(fecha);
             datos.add(reservas.getString(3));
             datos.add(reservas.getString(4));
             datos.add(reservas.getString(6));
-            listaReservas.add(datos);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate diaReserva = LocalDate.parse(fecha,formato);
+            System.out.println(LocalDate.now());
+            if(diaReserva.isAfter(LocalDate.now())){
+                listaReservas.add(datos);
+            }
         }
 
         return listaReservas;
