@@ -64,8 +64,7 @@ public class perfilUser {
             public void actionPerformed(ActionEvent e) {
                 String[] nombre = editName.getText().split(" ");
                 try {
-                    c.updateUser(dniTxt.getText(),editMail.getText(),nombre[0],nombre[1], editPasswd.getText(),true);
-                    viewMode();
+                    c.openPerfil(c.updateUser(dniTxt.getText(),editMail.getText(),nombre[0],nombre[1], editPasswd.getText(),true));
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

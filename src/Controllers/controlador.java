@@ -148,8 +148,9 @@ public class controlador {
         return passEncripted;
     }
 
-    public static void updateUser(String dni, String mail, String nombre, String apellido, String passwd,Boolean activo) throws SQLException {
+    public static usuarios updateUser(String dni, String mail, String nombre, String apellido, String passwd,Boolean activo) throws SQLException {
         String active = "";
+        usuarios user = new usuarios(dni,mail,nombre,apellido,passwd);
         if(activo==true){
             active = "1";
         }else{
@@ -168,6 +169,8 @@ public class controlador {
                     + "`active`='"+active+"' " + "WHERE id LIKE '"+dni+"';";
         }
         f.update(query);
+
+        return user;
     }
 
     public static usuarios selectUsuarios(String DNI) throws SQLException {
