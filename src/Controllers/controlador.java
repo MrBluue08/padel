@@ -71,7 +71,7 @@ public class controlador {
     }
 
     public static ArrayList<String> pistasDisponibles(java.util.Date date, String horaInicio) throws SQLException, ParseException {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("E MMM dd zz yyyy");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = formatoFecha.format(date);
         String query = "SELECT ID_pista,horaFin FROM reservas WHERE Fecha LIKE '"+fecha+"'";
          ResultSet pistasReservadas = f.ejecutarQuery(query);
@@ -85,7 +85,7 @@ public class controlador {
             }
         }
         query = "SELECT * FROM pistas WHERE ID_pista NOT IN (''"+ids+")";
-         ResultSet pistasLibres = f.ejecutarQuery(query);
+        ResultSet pistasLibres = f.ejecutarQuery(query);
         ArrayList<String> listaID = new ArrayList<>();
         while(pistasLibres.next()){
             listaID.add(pistasLibres.getString(1));
